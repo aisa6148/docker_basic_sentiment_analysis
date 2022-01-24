@@ -1,0 +1,27 @@
+##
+## You provide this
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-frontend
+spec:
+  selector:
+    matchLabels:
+      app: rest-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rest-frontend
+    spec:
+      containers:
+      - name: rest
+        image: aisa6148/rest:latest
+        env:
+          - name: REDIS_HOST
+            value: redis
+          - name: RABBITMQ_HOST
+            value: rabbitmq
+        ports:
+        - containerPort: 5001
